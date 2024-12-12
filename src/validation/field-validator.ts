@@ -4,6 +4,15 @@ type TitleValidatorPropsType = {
         { field: string, message: string }
     ]
 }
+
+type availableResolutionsValidatorPropsType = {
+    availableResolution: string[],
+    errorsArray: [
+        { field: string, message: string }
+    ]
+}
+
+
 export const TitleValidator = (props: TitleValidatorPropsType) => {
     if (!props.title) {
         props.errorsArray.push({field: 'title', message: 'no title'});
@@ -22,8 +31,20 @@ export const TitleValidator = (props: TitleValidatorPropsType) => {
     }
 }
 
+export const availableResolutionsFieldValidator = (props: availableResolutionsValidatorPropsType) => {
+    if (props.availableResolution && props.availableResolution.length) {
+        props.availableResolution.forEach((resolution: string) => {
+            if (!Object.keys(ResolutionEnum).includes(resolution)) {
+                props.errorsArray.push({
+                    field: 'availableResolution',
+                    message: 'exist not valid value'
+                })
+            }
+        })
+    }
+}
 
-export enum ResolutionEnum  {
+export enum ResolutionEnum {
     "P144" = "P144",
     "P240" = "P240",
     "P360" = "P360",
