@@ -9,6 +9,8 @@ export const videoController = {
         res.status(200).json(videos)
     },
     createVideo(req: Request, res: Response) {
+const title = req.body.title
+        const availableResolution = req.body.availableResolution
 
     },
     updateVideo(req: Request, res: Response) {
