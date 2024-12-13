@@ -1,44 +1,35 @@
-type TitleValidatorPropsType = {
-    title: string | undefined;
-    errorsArray: [
-        { field: string, message: string }
-    ]
-}
-
-type availableResolutionsValidatorPropsType = {
-    availableResolution: string[],
-    errorsArray: [
-        { field: string, message: string }
-    ]
-}
 
 
-export const TitleValidator = (props: TitleValidatorPropsType) => {
-    if (!props.title) {
-        props.errorsArray.push({field: 'title', message: 'no title'});
+
+export const titleValidator = (title: string | undefined,
+errorsArray: Array<{ field: string, message: string }>) => {
+    if (!title) {
+        errorsArray.push({field: 'title', message: 'no title'});
     }
-    if (props.title && props.title.trim().length > 40) {
-        props.errorsArray.push({
+    if (title && title.trim().length > 40) {
+        errorsArray.push({
             field: 'title',
             message: 'more than 40 symbols'
         });
     }
-    if (props.title && props.title.trim().length < 1) {
-        props.errorsArray.push({
+    if (title && title.trim().length < 1) {
+        errorsArray.push({
             field: 'title',
             message: 'add title'
         });
     }
 }
 
-export const availableResolutionsFieldValidator = (props: availableResolutionsValidatorPropsType) => {
-    if (props.availableResolution && props.availableResolution.length) {
-        props.availableResolution.forEach((resolution: string) => {
+export const availableResolutionsFieldValidator = (availableResolution: string[],
+                                                   errorsArray: Array<{ field: string, message: string }>) => {
+    if (availableResolution && availableResolution.length) {
+        availableResolution.forEach((resolution: string) => {
             if (!Object.keys(ResolutionEnum).includes(resolution)) {
-                props.errorsArray.push({
+                errorsArray.push({
                     field: 'availableResolution',
                     message: 'exist not valid value'
                 })
+                return
             }
         })
     }

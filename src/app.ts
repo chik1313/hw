@@ -4,6 +4,7 @@ import {SETTINGS} from "./settings";
 import {db} from "./db";
 import {videosRouter} from "./videos/videoRouter";
 
+
 export const app = express() // создать приложение
 app.use(express.json()) // создание свойств-объектов body и query во всех реквестах
 app.use(cors()) // разрешить любым фронтам делать запросы на наш бэк
