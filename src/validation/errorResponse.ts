@@ -1,12 +1,10 @@
-type errorsArayPropsType = {
-    errorsArray: [{message: string , field: string}];
-}
 
-export const errorResponse = (props: errorsArayPropsType) => {
+
+export const errorResponse = (errorsArray: Array<{message: string , field: string}>) => {
 let errors_ = {
     errorsMessage: []  as Array<{message: string , field: string}>
 }
-props.errorsArray.forEach(error => {
+errorsArray.forEach(error => {
     errors_.errorsMessage.push(error)
 })
 }
