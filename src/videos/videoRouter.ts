@@ -11,10 +11,19 @@ export const videoController = {
         const videos = db.videos
         res.status(200).json(videos)
     },
+    getVideoById(req: Request<{ id: string }, {}, {}>,
+                 res: Response<videoViewModule>) {
+        const id = +req.params.id;
+        const findVideo = db.videos.find((video) => video.id === id);
+        if (!findVideo) {
+            res.status(404)
+            return
+        }
+        res.status(200).json(findVideo)
+    },
 
-
-    createVideo(req: Request< {}, {} , videoInputType>,
-                res: Response <videoViewModule | APIErrorResultType>) {
+    createVideo(req: Request<{}, {}, videoInputType>,
+                res: Response<videoViewModule | APIErrorResultType>) {
         const title = req.body.title
         const availableResolution = req.body.availableResolutions
         const author = req.body.author
@@ -23,7 +32,7 @@ export const videoController = {
 
         titleValidator(title, errorsArray)
         availableResolutionsFieldValidator(availableResolution, errorsArray)
-        authorValidator(author , errorsArray)
+        authorValidator(author, errorsArray)
 
         if (errorsArray.length > 0) {
             const errors_ = errorResponse(errorsArray)
@@ -49,13 +58,15 @@ export const videoController = {
             createdAt: createdAt.toISOString(),
             publicationDate: publicationDate.toISOString()
         }
+
         db.videos = [...db.videos, newVideo]
-         res.status(201).json(newVideo)
+
+        res.status(201).json(newVideo)
 
     },
 
 
-    updateVideo(req: Request< { id:string } , {} , videoInputType>,
+    updateVideo(req: Request<{ id: string }, {}, videoInputType>,
                 res: Response<APIErrorResultType>) {
         let body = req.body;
 
@@ -69,8 +80,8 @@ export const videoController = {
         let videoId = req.params.id;
 
         titleValidator(title, errorsArray)
-        authorValidator(author , errorsArray)
-        availableResolutionsFieldValidator(availableResolutions , errorsArray)
+        authorValidator(author, errorsArray)
+        availableResolutionsFieldValidator(availableResolutions, errorsArray)
 
         if (errorsArray) {
             res.status(400).json({errorsMessages: errorsArray})
@@ -82,7 +93,7 @@ export const videoController = {
 
 
 videosRouter.get('/', videoController.getVideos);
-// videosRouter.get('/:id', videoController.)
+videosRouter.get('/:id', videoController.getVideoById)
 videosRouter.post('/', videoController.createVideo);
 videosRouter.put('/:id', videoController.updateVideo);
 videosRouter.delete('/:id', videoController.updateVideo);
