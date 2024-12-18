@@ -2,7 +2,7 @@ import {availableResolution} from "../types/types";
 
 
 export const titleValidator = (title: string | undefined,
-errorsArray: Array<{ field: string, message: string }>) => {
+                               errorsArray: Array<{ field: string, message: string }>) => {
     if (!title) {
         errorsArray.push({field: 'title', message: 'no title'});
     }
@@ -45,27 +45,45 @@ export const availableResolutionsFieldValidator = (availableResolution: availabl
     }
 }
 
-export const canBeDownloadedValidator=(canBeDownloaded: any, errorsArray: Array<{ field: string, message: string }>)=> {
-    if(typeof canBeDownloaded !== "boolean") {
+export const canBeDownloadedValidator = (canBeDownloaded: any, errorsArray: Array<{
+    field: string,
+    message: string
+}>) => {
+    if (typeof canBeDownloaded !== "boolean") {
         errorsArray.push({
             field: 'canBeDownloaded',
             message: 'canBeDownloaded must me boolean'
         })
     }
 }
-export const ageRestructionValidator = (age: number | undefined, errorsArray: Array<{ field: string, message: string }>) => {
-    if (age && age < 18) {
+export const ageRestructionValidator = (age: number | undefined, errorsArray: Array<{
+    field: string,
+    message: string
+}>) => {
+    if (age && age > 18) {
         errorsArray.push({
             field: 'minAgeRestriction',
-            message: 'min age must be more than 18'})
+            message: "age cannot be more than 18"
+        })
     }
     if (age && age < 1) {
         errorsArray.push({
             field: 'minAgeRestriction',
-            message: 'age cannot be less than 1'})
+            message: 'age cannot be less than 1'
+        })
     }
-
-
+}
+export const publicationDateValidator = (publicationDate: string | undefined, errorsArray: Array<{
+    field: string,
+    message: string
+}>) => {
+    const RegExpDate = new RegExp(/\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z/);
+    if (!publicationDate || (typeof publicationDate !== 'string') || !RegExpDate.test(publicationDate)) {
+        errorsArray.push({
+            field: 'publicationDate',
+            message: "publicationDate"
+        })
+    }
 }
 
 export enum ResolutionEnum {

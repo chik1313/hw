@@ -4,7 +4,7 @@ import {
     ageRestructionValidator,
     authorValidator,
     availableResolutionsFieldValidator,
-    canBeDownloadedValidator,
+    canBeDownloadedValidator, publicationDateValidator,
     titleValidator
 } from "../validation/field-validator";
 import {errorResponse} from "../validation/errorResponse";
@@ -95,6 +95,7 @@ export const videoController = {
         canBeDownloadedValidator(canBeDownloaded, errorsArray)
         availableResolutionsFieldValidator(availableResolutions, errorsArray)
         ageRestructionValidator(minAgeRestriction, errorsArray)
+        publicationDateValidator(publicationDate , errorsArray)
 
         if (errorsArray.length) {
             res.status(400).json({errorsMessages: errorsArray})
