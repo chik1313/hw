@@ -13,6 +13,11 @@ app.get('/', (req, res) => {
     // эндпоинт, который будет показывать на верселе какая версия бэкэнда сейчас залита
     res.status(200).json({version: '1.0'})
 })
+app.delete('/testing/all-data', (req, res) => {
+    // эндпоинт, который будет показывать на верселе какая версия бэкэнда сейчас залита
+    db.videos = []
+    res.sendStatus(204)
+})
 
 
 app.use(SETTINGS.PATH.VIDEOS, videosRouter)

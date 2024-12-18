@@ -36,7 +36,7 @@ export const availableResolutionsFieldValidator = (availableResolution: availabl
         availableResolution.forEach((resolution: string) => {
             if (!Object.keys(ResolutionEnum).includes(resolution)) {
                 errorsArray.push({
-                    field: 'availableResolution',
+                    field: 'availableResolutions',
                     message: 'exist not valid value'
                 })
                 return
@@ -45,7 +45,28 @@ export const availableResolutionsFieldValidator = (availableResolution: availabl
     }
 }
 
+export const canBeDownloadedValidator=(canBeDownloaded: any, errorsArray: Array<{ field: string, message: string }>)=> {
+    if(typeof canBeDownloaded !== "boolean") {
+        errorsArray.push({
+            field: 'canBeDownloaded',
+            message: 'canBeDownloaded must me boolean'
+        })
+    }
+}
+export const ageRestructionValidator = (age: number | undefined, errorsArray: Array<{ field: string, message: string }>) => {
+    if (age && age < 18) {
+        errorsArray.push({
+            field: 'minAgeRestriction',
+            message: 'min age must be more than 18'})
+    }
+    if (age && age < 1) {
+        errorsArray.push({
+            field: 'minAgeRestriction',
+            message: 'age cannot be less than 1'})
+    }
 
+
+}
 
 export enum ResolutionEnum {
     "P144" = "P144",
