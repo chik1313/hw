@@ -94,7 +94,7 @@ export const videoController = {
         authorValidator(author, errorsArray)
         canBeDownloadedValidator(canBeDownloaded, errorsArray)
         availableResolutionsFieldValidator(availableResolutions, errorsArray)
-        ageRestructionValidator(minAgeResdddddtriction, errorsArray)
+        ageRestructionValidator(minAgeRestriction, errorsArray)
         publicationDateValidator(publicationDate , errorsArray)
 
         if (errorsArray.length) {
