@@ -111,7 +111,6 @@ export const videoController = {
             updatedVideo.availableResolutions = availableResolutions
             updatedVideo.minAgeRestriction = minAgeRestriction || null
             updatedVideo.publicationDate = publicationDate
-            // как можно было по другому сдедлать?
         }
         if (!updatedVideo) {
             res.sendStatus(404)
