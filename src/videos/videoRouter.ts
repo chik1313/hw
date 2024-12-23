@@ -121,6 +121,7 @@ export const videoController = {
     deleteVideo(req: Request<{ id: string }, any, any>,
                 res: Response) {
         const id = +req.params.id;
+        ssss
         let findVideo = db.videos.find(video => video.id === id);
         if (!findVideo) {
             res.sendStatus(404)
