@@ -117,7 +117,6 @@ export const videoController = {
             return
         }
         res.sendStatus(204)
-
     },
     deleteVideo(req: Request<{ id: string }, any, any>,
                 res: Response) {
